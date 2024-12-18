@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import axios, { isAxiosError } from 'axios';
+import { toast } from 'sonner';
 import type { RegisterForm } from '../types';
 import ErrorMessage from '../components/ErrorMessage';
 
@@ -18,6 +19,7 @@ export default function RegisterView() {
     watch,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({ defaultValues: initialValues });
 
   const password = watch('password');
@@ -28,10 +30,11 @@ export default function RegisterView() {
         `${import.meta.env.VITE_API_URL}/auth/register`,
         formData
       );
-      console.log(data);
+      toast.success(data.msg);
+      reset();
     } catch (error) {
       if (isAxiosError(error) && error.response) {
-        console.log(error.response.data.error);
+        toast.error(error.response.data.error);
       }
     }
   };

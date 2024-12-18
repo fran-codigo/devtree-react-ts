@@ -18,6 +18,8 @@ export default function RegisterView() {
     formState: { errors },
   } = useForm({ defaultValues: initialValues });
 
+  const password = watch('password');
+
   const handleRegister = () => {
     console.log('desde handle register');
   };
@@ -61,7 +63,11 @@ export default function RegisterView() {
             type="email"
             placeholder="Email de Registro"
             {...register('email', {
-              required: 'El email es obligatorio',
+              required: 'El correo es obligatorio',
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: 'E-mail no válido',
+              },
             })}
             className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
           />
@@ -102,6 +108,10 @@ export default function RegisterView() {
             placeholder="Password de Registro"
             {...register('password', {
               required: 'La contraseña es obligatoria',
+              minLength: {
+                value: 8,
+                message: 'La contraseña debe ser al menos 8 caracteres',
+              },
             })}
             className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
           />
@@ -124,6 +134,8 @@ export default function RegisterView() {
             placeholder="Repetir Password"
             {...register('password_confirmation', {
               required: 'Confirma tu contraseña',
+              validate: (value) =>
+                value === password || 'Las contraseñas no son iguales',
             })}
             className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
           />

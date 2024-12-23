@@ -2,6 +2,7 @@ export type User = {
   name: string;
   handle: string;
   email: string;
+  _id: string;
 };
 
 export type RegisterForm = Pick<User, 'handle' | 'email' | 'name'> & {

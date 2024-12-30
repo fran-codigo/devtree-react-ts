@@ -30,7 +30,7 @@ export default function ProfileView() {
       queryClient.invalidateQueries({ queryKey: ['user'] });
     },
   });
-
+  
   const uploadImageMutation = useMutation({
     mutationFn: uploadImage,
     onError: (error) => {
@@ -38,6 +38,7 @@ export default function ProfileView() {
     },
     onSuccess: (data) => {
       console.log(data);
+      queryClient.invalidateQueries({ queryKey: ['user'] });
     },
   });
 

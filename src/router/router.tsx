@@ -3,7 +3,7 @@ import LoginView from '../views/LoginView';
 import RegisterView from '../views/RegisterView';
 import AuthLayout from '../layouts/AuthLayout';
 import AppLayout from '../layouts/AppLayout';
-import LinkTree from '../views/admin/LinkTree';
+import LinkTreeView from '../views/admin/LinkTreeView';
 import ProfileView from '../views/admin/ProfileView';
 
 export default function Router() {
@@ -27,7 +27,7 @@ export default function Router() {
         >
           <Route
             index={true}
-            element={<LinkTree />}
+            element={<LinkTreeView />}
           />
           <Route
             path="profile"
